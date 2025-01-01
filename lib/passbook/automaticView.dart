@@ -21,7 +21,7 @@ class _AutomaticViewState extends State<AutomaticView>{
   }
 
   Stream<List<TotalData>> selectTotal(){
-    return db.totalRepo.readAll();
+    return db.totalRepo.readIndex([1]);
   }
 
   Future updateSaleryDay(int saleryDay){
@@ -139,14 +139,13 @@ class _AutomaticViewState extends State<AutomaticView>{
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(left: 15),
-                                child: Container(width: double.infinity, child: Text("현재금액: ${l2[1].money}", style: TextStyle(fontSize: 21))),
+                                child: Container(width: double.infinity, child: Text("현재금액: ${l2[0].money}", style: TextStyle(fontSize: 21))),
                               ),
 
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("자동이체 금액: ${autoMoney}", style: TextStyle(fontSize: 18)),
-                                  Text("이체일:", style: TextStyle(fontSize: 18))
+                                  Text("자동이체 금액: ${autoMoney}", style: TextStyle(fontSize: 18))
                                 ],
                               )
                             ],

@@ -32,8 +32,8 @@ class SaleryRepo extends ChangeNotifier{
   }
 
    //select
-  Future<List<SaleryData>> readauto(){
-    final result = (_db.select(_db.salery)..where((t) => t.index.equals(2))).get();
+  Future<List<SaleryData>> readsettingValue(int index){
+    final result = (_db.select(_db.salery)..where((t) => t.index.equals(index))).get();
     return result;
   }
 }

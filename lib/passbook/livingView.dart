@@ -16,7 +16,7 @@ class _LivingViewState extends State<LivingView>{
   Mydatabase db = Mydatabase.instance;
   List<TotalData> totalData = [];
   Stream<List<TotalData>> selectTotal(){
-    return db.totalRepo.readAll();
+    return db.totalRepo.readIndex([2]);
   }
   Stream<List<LivingData>> selectLiving(int idx){
     return db.livingRepo.read(idx);
@@ -99,7 +99,7 @@ class _LivingViewState extends State<LivingView>{
                 onPressed: () {
                   //db저장
                   insertLiving(list.indexOf(dropdownValue), name.text, BigInt.parse(money.text));
-                  update(totalData[2].money-BigInt.parse(money.text));
+                  update(totalData[0].money-BigInt.parse(money.text));
                   Navigator.pop(context);
                 },
               ),
@@ -142,7 +142,7 @@ class _LivingViewState extends State<LivingView>{
                 return Card(
                   child: Padding(
                     padding: EdgeInsets.only(left: 15),
-                    child:Text("현재금액: ${totalData[2].money} ", style: TextStyle(fontSize: 21))
+                    child:Text("현재금액: ${totalData[0].money} ", style: TextStyle(fontSize: 21))
                   ),
                 );
               }

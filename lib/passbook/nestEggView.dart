@@ -12,13 +12,16 @@ class _NestEggViewState extends State<NestEggView>{
   Mydatabase db = Mydatabase.instance;
   List<TotalData> totalData = [];
   Stream<List<TotalData>> selectTotal(){
-    return db.totalRepo.readAll();
+    return db.totalRepo.readIndex([3,2]);
   }
   Stream<List<NestEggData>> selectNestEgg(){
     return db.nestEggRepo.readAll();
   }
   Future update(int type, BigInt money){
     return db.totalRepo.updateMoney(type, money);
+  }
+  Future sendingLiving(BigInt money){
+    return db.nestEggRepo.insertMoney(3, 2, money);
   }
 
 TextEditingController sendLiving = TextEditingController();
@@ -56,7 +59,7 @@ TextEditingController sendLiving = TextEditingController();
                 return Card(
                   child: Padding(
                     padding: EdgeInsets.only(left: 15),
-                    child:Text("현재금액: ${totalData[3].money} ", style: TextStyle(fontSize: 21))
+                    child:Text("현재금액: ${totalData[1].money} ", style: TextStyle(fontSize: 21))
                   ),
                 );
               }
@@ -141,8 +144,9 @@ TextEditingController sendLiving = TextEditingController();
                 TextButton(
                   child: const Text("원 생활비통장 이체"),
                   onPressed: () {
-                    update(3, totalData[3].money-BigInt.parse(sendLiving.text));
-                    update(2, totalData[2].money+BigInt.parse(sendLiving.text));
+                    update(3, totalData[1].money-BigInt.parse(sendLiving.text));
+                    update(2, totalData[0].money+BigInt.parse(sendLiving.text));
+                    sendingLiving(BigInt.parse(sendLiving.text));
                   },
                 )
               ],

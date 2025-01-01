@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:split_bankbook/banksplit/banksplitStepView.dart';
+import 'package:split_bankbook/db/database.dart';
 import 'package:split_bankbook/passbook/automaticView.dart';
 import 'package:split_bankbook/passbook/livingView.dart';
 import 'package:split_bankbook/passbook/nestEggView.dart';
@@ -7,43 +9,101 @@ import 'package:split_bankbook/passbook/saleryView.dart';
 class HomeView extends StatefulWidget{
   const HomeView({super.key});
   
-   @override
+  @override
   State<HomeView> createState() => _HomeViewState();
 }
-
 class _HomeViewState extends State<HomeView>{
+  Mydatabase db = Mydatabase.instance;
+  
+  List<TotalData> totalData = [];
+  Stream<List<TotalData>> selectTotal(){
+    return db.totalRepo.readAll();
+  }
+  
+  Future<List<SaleryData>> selectSalery(int index) async {
+    final res = await db.saleryRepo.readsettingValue(index);
+    return res;
+  }
+
   @override
   Widget build(BuildContext context) {
+    const List<String>passbook = ["월급통장","자동이체통장","생활비통장","비상금통장"];
+    List<TotalData> totalData = [];
+    List<SaleryData> settingData = [];
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("통장분할 도우미"),
+        centerTitle: true,
+        backgroundColor: Colors.lightGreen,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ElevatedButton(
-            onPressed: () { 
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>  SaleryView()));
-            },
-            child: const Text("월급통장")
+          Expanded(
+            child:Card(
+              child: StreamBuilder(
+                stream: selectTotal(),
+                builder: (context,snapshot){
+                  if (snapshot.connectionState == ConnectionState.waiting){
+                    return CircularProgressIndicator();
+                  } 
+                  else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } 
+                  else if (!snapshot.hasData) {
+                    return Text('No data');
+                  } 
+                  else {
+                    totalData = snapshot.data!;
+                    return ListView.builder(
+                      itemCount: 4,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          title: Expanded(
+                            child: ElevatedButton(
+                              onPressed: () { 
+                                switch(index){
+                                  case 0:
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SaleryView()));
+                                    break;
+                                  case 1:
+                                     Navigator.push(context, MaterialPageRoute(builder: (context) => const AutomaticView()));
+                                     break;
+                                  case 2:
+                                     Navigator.push(context, MaterialPageRoute(builder: (context) => const LivingView()));
+                                     break;
+                                  default:
+                                     Navigator.push(context, MaterialPageRoute(builder: (context) => const NestEggView()));
+                                }
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(passbook[index]),
+                                  Text("₩${totalData[index].money}")
+                                ],
+                              )
+                            ),
+                          ),
+                        );
+                      }
+                    );
+                  }
+                }
+              ),
+            )
           ),
           ElevatedButton(
-            onPressed: () { 
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const AutomaticView()));
-            },
-            child: const Text("자동이체통장")
-          ),
-          ElevatedButton(
-            onPressed: () { 
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const LivingView()));
-            },
-            child: const Text("생활비통장")
-          ),
-          ElevatedButton(
-            onPressed: () { 
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const NestEggView()));
-            },
-            child: const Text("비상금통장")
-          ),
-        ]
+            onPressed: () async {
+              List<SaleryData> autoData = await selectSalery(2);
+              List<SaleryData> LivingData = await selectSalery(3);
+              settingData.add(autoData[0]);
+              settingData.add(LivingData[0]);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => BanksplitStepView(data: totalData, settingData: settingData)));
+            }, 
+            child: const Text("통장분할 시작")
+          )
+        ],
       )
     );
   }

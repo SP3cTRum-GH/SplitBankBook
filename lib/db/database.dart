@@ -29,6 +29,7 @@ class Mydatabase extends _$Mydatabase {
         await m.createAll();
         await saleryRepo.insertMoney(0, BigInt.zero);
         await saleryRepo.insertMoney(0, BigInt.zero);
+        await saleryRepo.insertMoney(0, BigInt.zero);
         await totalRepo.insertMoney(0, BigInt.zero);
         await totalRepo.insertMoney(1, BigInt.zero);
         await totalRepo.insertMoney(2, BigInt.zero);

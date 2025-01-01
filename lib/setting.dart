@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:split_bankbook/setting/setLivingMoney.dart';
 import 'package:split_bankbook/setting/setSaleryDay.dart';
 import 'package:split_bankbook/setting/setSaleryMoney.dart';
 
@@ -34,6 +35,14 @@ class _SettingViewState extends State<SettingView>{
                 child: const Text("월급액수설정"),
                 onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) =>  SetSaleryMoney()));
+                },
+              )
+            ),
+            ListTile(
+              title: TextButton(
+                child: const Text("목표 생활비 설정"),
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SetLivingMoney()));
                 },
               )
             )

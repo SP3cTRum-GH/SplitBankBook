@@ -31,4 +31,8 @@ class TotalRepo extends ChangeNotifier{
   Stream<List<TotalData>> readAll(){
     return _db.select(_db.total).watch();
   }
+
+  Stream<List<TotalData>> readIndex(List<int> type){
+    return (_db.select(_db.total)..where((t) => t.type.isIn(type))).watch();
+  }
 }
