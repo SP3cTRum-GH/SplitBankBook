@@ -24,6 +24,7 @@ class _MoveNestEggState extends State<MoveNestEgg> {
 
   @override
   Widget build(BuildContext context) {
+    BigInt sendMoney = widget.data[0].money + widget.editData[0] - widget.editData[1] - widget.editData[2] - widget.editData[3];
     return Scaffold(
        appBar: AppBar(
         title: const Text("비상금통장으로 이체"),
@@ -51,9 +52,9 @@ class _MoveNestEggState extends State<MoveNestEgg> {
                   children: [
                     Expanded(
                     child: TextButton(
-                      child: const Text("비상금통장 이체"),
+                      child: Text("$sendMoney원 비상금통장 이체"),
                       onPressed: () {
-                        widget.editData[3] = widget.data[0].money + widget.editData[0] - widget.editData[1] - widget.editData[2] - widget.editData[3];
+                        widget.editData[3] = sendMoney;
                         // update(0, totalData[0].money-BigInt.parse(sendNestEgg.text));
                         // update(3, totalData[3].money+BigInt.parse(sendNestEgg.text));
                         // sendingNestEgg(BigInt.parse(sendNestEgg.text));
@@ -85,7 +86,9 @@ class _MoveNestEggState extends State<MoveNestEgg> {
                       update(1, widget.data[1].money + widget.editData[1]);
                       update(2, widget.data[2].money + widget.editData[2]);
                       update(3, widget.data[3].money + widget.editData[3]);
-                      sendingNestEgg(widget.editData[3]);
+                      if(widget.editData[3] != BigInt.zero){
+                        sendingNestEgg(widget.editData[3]);
+                      }
                       // update(0, widget.data[0].money);
                       // update(1, widget.data[1].money + widget.editData[1]);
                       // update(2, widget.data[2].money + widget.editData[2]);

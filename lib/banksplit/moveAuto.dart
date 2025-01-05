@@ -13,9 +13,9 @@ class MoveAuto extends StatefulWidget {
 }
 
 class _MoveAutoState extends State<MoveAuto> {
-  
   @override
   Widget build(BuildContext context) {
+    BigInt sendMoney = widget.autoMoney.salery - widget.data[1].money;
     return Scaffold(
        appBar: AppBar(
         title: const Text("자동이체통장으로 이체"),
@@ -37,12 +37,12 @@ class _MoveAutoState extends State<MoveAuto> {
               ),
             ),
             ListTile(
-              title: Padding( // steam형 future형으로 바꿀것
+              title: Padding( 
                 padding: const EdgeInsets.only(left: 10), 
                 child: TextButton(
-                  child: const Text("자동이체통장 이체"),
+                  child: Text("$sendMoney원 자동이체통장 이체"),
                   onPressed: () {
-                    widget.editData[1] = widget.autoMoney.salery - widget.data[1].money;
+                    widget.editData[1] = sendMoney;
                     setState(() {
                       
                     });

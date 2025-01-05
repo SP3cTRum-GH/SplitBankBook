@@ -27,6 +27,7 @@ class _NestEggViewState extends State<NestEggView>{
 TextEditingController sendLiving = TextEditingController();
    @override
   Widget build(BuildContext context) {
+    const List<String>passbook = ["월급통장","자동이체통장","생활비통장","비상금통장"];
     return Scaffold(
        appBar: AppBar(
         title: const Text("비상금통장"),
@@ -100,12 +101,12 @@ TextEditingController sendLiving = TextEditingController();
                                 child: Row(
                                   children: [
                                     Expanded(
-                                      child:Text(log[size-1-index].from.toString(), 
+                                      child:Text(passbook[log[size-1-index].from].toString(), 
                                         style: const TextStyle(fontSize: 21)
                                       )
                                     ),
                                     Expanded(
-                                      child:Text(log[size-1-index].to.toString(), 
+                                      child:Text(passbook[log[size-1-index].to].toString(), 
                                         style: const TextStyle(fontSize: 21)
                                       )
                                     ),

@@ -38,8 +38,11 @@ class _HomeViewState extends State<HomeView>{
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
+          Flexible(
+            flex: 3,
+            fit: FlexFit.loose,
             child:Card(
               child: StreamBuilder(
                 stream: selectTotal(),
@@ -55,53 +58,117 @@ class _HomeViewState extends State<HomeView>{
                   } 
                   else {
                     totalData = snapshot.data!;
-                    return ListView.builder(
-                      itemCount: 4,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Expanded(
-                            child: ElevatedButton(
-                              onPressed: () { 
-                                switch(index){
-                                  case 0:
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SaleryView()));
-                                    break;
-                                  case 1:
-                                     Navigator.push(context, MaterialPageRoute(builder: (context) => const AutomaticView()));
-                                     break;
-                                  case 2:
-                                     Navigator.push(context, MaterialPageRoute(builder: (context) => const LivingView()));
-                                     break;
-                                  default:
-                                     Navigator.push(context, MaterialPageRoute(builder: (context) => const NestEggView()));
-                                }
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(passbook[index]),
-                                  Text("₩${totalData[index].money}")
-                                ],
-                              )
+                    return Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(passbook[0], textAlign: TextAlign.center,),
+                                Text("₩${totalData[0].money}", textAlign: TextAlign.center,),
+                              ],
                             ),
-                          ),
-                        );
-                      }
+                            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SaleryView())),
+                          )
+                        ),
+                       Expanded(
+                          child: TextButton(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(passbook[1], textAlign: TextAlign.center,),
+                                Text("₩${totalData[1].money}", textAlign: TextAlign.center,),
+                              ],
+                            ),
+                            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AutomaticView())),
+                          )
+                        ),
+                        Expanded(
+                          child: TextButton(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(passbook[2], textAlign: TextAlign.center,),
+                                Text("₩${totalData[2].money}", textAlign: TextAlign.center,),
+                              ],
+                            ),
+                            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const LivingView())),
+                          )
+                        ),
+                        Expanded(
+                          child: TextButton(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(passbook[3], textAlign: TextAlign.center,),
+                                Text("₩${totalData[3].money}", textAlign: TextAlign.center,),
+                              ],
+                            ),
+                            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const NestEggView())),
+                          )
+                        ),
+                      ],
+                    )
                     );
+                    // return ListView.builder(
+                    //   itemCount: 4,
+                    //   itemBuilder: (BuildContext context, int index) {
+                    //     return Container(
+                    //       margin: EdgeInsets.fromLTRB(0,20,0,20),
+                    //       //minVerticalPadding: 20,
+                    //       child: Expanded(
+                    //         child: ElevatedButton(
+                    //           onPressed: () { 
+                    //             switch(index){
+                    //               case 0:
+                    //                 Navigator.push(context, MaterialPageRoute(builder: (context) => const SaleryView()));
+                    //                 break;
+                    //               case 1:
+                    //                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AutomaticView()));
+                    //                  break;
+                    //               case 2:
+                    //                  Navigator.push(context, MaterialPageRoute(builder: (context) => const LivingView()));
+                    //                  break;
+                    //               default:
+                    //                  Navigator.push(context, MaterialPageRoute(builder: (context) => const NestEggView()));
+                    //             }
+                    //           },
+                    //           child: Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: [
+                    //               Text(passbook[index]),
+                    //               Text("₩${totalData[index].money}")
+                    //             ],
+                    //           )
+                    //         ),
+                    //       ),
+                    //     );
+                    //   }
+                    // );
                   }
                 }
               ),
             )
           ),
-          ElevatedButton(
-            onPressed: () async {
-              List<SaleryData> autoData = await selectSalery(2);
-              List<SaleryData> LivingData = await selectSalery(3);
-              settingData.add(autoData[0]);
-              settingData.add(LivingData[0]);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => BanksplitStepView(data: totalData, settingData: settingData)));
-            }, 
-            child: const Text("통장분할 시작")
+          Flexible(
+            flex: 1,
+            fit: FlexFit.tight,
+            child: Card(
+              child: TextButton(
+                onPressed: () async {
+                  List<SaleryData> autoData = await selectSalery(2);
+                  List<SaleryData> LivingData = await selectSalery(3);
+                  settingData.add(autoData[0]);
+                  settingData.add(LivingData[0]);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => BanksplitStepView(data: totalData, settingData: settingData)));
+                }, 
+                child: const Text("통장분할 시작")
+              )
+            )
+            
           )
         ],
       )

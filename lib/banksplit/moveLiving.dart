@@ -16,7 +16,7 @@ class _MoveLivingState extends State<MoveLiving> {
   
   @override
   Widget build(BuildContext context) {
-    TextEditingController sendLiving = TextEditingController();
+    BigInt sendMoney = widget.livingMoney.salery - widget.data[2].money;
 
     return Scaffold(
        appBar: AppBar(
@@ -41,30 +41,19 @@ class _MoveLivingState extends State<MoveLiving> {
             ListTile(
               title: Padding(
                 padding: const EdgeInsets.only(left: 10), 
-                child:Row(
-                  children: [
-                    Expanded(
-                      child:TextField(
-                        controller: sendLiving,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: '이체금액 입력',
-                        ),
-                      )
-                    ),
-                    TextButton(
-                      child: const Text("생활비통장 이체"),
-                      onPressed: () { //목표금액 - 현재 생활비통장금액
-                        widget.editData[2] = widget.livingMoney.salery - widget.data[2].money; 
-                        // update(0, totalData[0].money-BigInt.parse(sendLiving.text));
-                        // update(2, totalData[2].money+BigInt.parse(sendLiving.text));
-                        setState(() {
-                        
+                child: Expanded(
+                  child: TextButton(
+                    child: Text("$sendMoney원 생활비통장 이체"),
+                    onPressed: () { //목표금액 - 현재 생활비통장금액
+                      widget.editData[2] = sendMoney;
+                      // update(0, totalData[0].money-BigInt.parse(sendLiving.text));
+                      // update(2, totalData[2].money+BigInt.parse(sendLiving.text));
+                      setState(() {
+                      
                       });
-                      },
-                    )
-                  ],
-                )
+                    },
+                  )
+                ),
               ),
             ),
           Row(
