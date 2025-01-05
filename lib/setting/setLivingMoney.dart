@@ -23,7 +23,7 @@ class _SetLivingMoneyState extends State<SetLivingMoney>{
     TextEditingController teCnt = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("월급액수 설정"),
+        title: const Text("목표생활비 설정"),
         centerTitle: true,
         backgroundColor: Colors.lightGreen,
         leading: IconButton(

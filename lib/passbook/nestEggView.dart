@@ -101,7 +101,7 @@ TextEditingController sendLiving = TextEditingController();
                                 child: Row(
                                   children: [
                                     Expanded(
-                                      child:Text(passbook[log[size-1-index].from].toString(), 
+                                      child:Text("${passbook[log[size-1-index].from].toString()} ->", 
                                         style: const TextStyle(fontSize: 21)
                                       )
                                     ),

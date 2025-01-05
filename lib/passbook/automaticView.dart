@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_stream_builder/multi_stream_builder.dart';
 import 'package:split_bankbook/db/database.dart';
-//이체항목별 이체일 설정할것
+//TODO 삭제기능 구현 
 class AutomaticView extends StatefulWidget{
   const AutomaticView({super.key});
   
