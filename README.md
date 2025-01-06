@@ -21,11 +21,11 @@
         <tr>
             <td colspan ='5'>통장분할</td>
         <tr>
-            <td><img src="Docs/bonusCheck.png" width="200"/></td>
-            <td><img src="Docs/sendAutomoney.png" width="200"/></td>
-            <td><img src="Docs/sendLivingmoney.png" width="200"/></td>
-            <td><img src="Docs/sendNestEggmoney.png" width="200"></td>
-            <td><img src="Docs/splitEnd.png" width="200"></td>
+            <td><img src="docs/bonusCheck.png" width="200"/></td>
+            <td><img src="docs/sendAutomoney.png" width="200"/></td>
+            <td><img src="docs/sendLivingmoney.png" width="200"/></td>
+            <td><img src="docs/sendNestEggmoney.png" width="200"></td>
+            <td><img src="docs/splitEnd.png" width="200"></td>
         </tr>
     </table>
 </div>
@@ -35,10 +35,10 @@
         <tr>
             <td colspan ='4'>View</td>
         <tr>
-            <td><img src="Docs/home.png" width="200"/></td>
-            <td><img src="Docs/automaticList.png" width="200"/></td>
-            <td><img src="Docs/livingView.png" width="200"/></td>
-            <td><img src="Docs/nestEggView.png" width="200"/></td>
+            <td><img src="docs/home.png" width="200"/></td>
+            <td><img src="docs/automaticList.png" width="200"/></td>
+            <td><img src="docs/livingView.png" width="200"/></td>
+            <td><img src="docs/nestEggView.png" width="200"/></td>
         </tr>
     </table>
 </div>
