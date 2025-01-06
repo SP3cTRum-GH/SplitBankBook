@@ -9,9 +9,9 @@
         <tr>
             <td colspan ='3'>Setting</td>
         <tr>
-            <td><img src="Docs/saleryCheck.png" width="200"/></td>
-            <td><img src="Docs/automaticList.png" width="200"/></td>
-            <td><img src="Docs/settingLivingmoneyGoal.png" width="200"/></td>
+            <td><img src="docs/saleryCheck.png" width="200"/></td>
+            <td><img src="docs/automaticList.png" width="200"/></td>
+            <td><img src="docs/settingLivingmoneyGoal.png" width="200"/></td>
         </tr>
     </table>
 </div>
